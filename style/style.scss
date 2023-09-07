@@ -6,6 +6,7 @@
   --white: #fff;
   --black: #000;
   --light-blue: #7bb2ff;
+  --medium-blue: #7aa8ff;
 }
 
 * {
@@ -24,4 +25,63 @@ body {
   line-height: 1.5;
   color: var(--black);
   background-color: var(--light-blue);
+
+  main {
+    background-color: var(--white);
+    padding: 1.6rem;
+    border-radius: 0.5rem;
+
+    div.main-box {
+
+      h1 {
+        font-size: 2rem;
+        margin: 0 0 0.4rem 0;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+
+        label {
+          margin-bottom: 0.5rem;
+          font-weight: bold;
+        }
+
+        input[type="text"] {
+          padding: 0.5rem;
+          border: 2px solid var(--light-blue);
+          border-radius: 0.5rem;
+          font-size: 1rem;
+          margin-bottom: 1rem;
+
+          &:focus {
+            border: 2px solid var(--medium-blue);
+            outline: none;
+          }
+        }
+
+        input[type="submit"] {
+          padding: 0.5rem;
+          border: none;
+          border-radius: 0.5rem;
+          background-color: var(--light-blue);
+          color: var(--white);
+          font-size: 1rem;
+          font-weight: bold;
+          cursor: pointer;
+
+          &:hover {
+            background-color: var(--medium-blue)
+          }
+        }
+      }
+    }
+  }
 }
