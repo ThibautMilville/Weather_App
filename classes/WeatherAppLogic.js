@@ -43,11 +43,17 @@ export default class WeatherAppLogic {
     } else {
       try {
         this.data = await this.fetchAPI();
-        console.log(this.data);
+        this.onDataAvailable();
       } catch (err) {
         console.log('Oh no', err);
       }
     }
+  }
+
+  onDataAvailable() {
+    // Create a custom event to pass the data to the WeatherAppIntegration class
+    const event = new CustomEvent('weatherDataAvailable', {detail: this.data});
+    document.dispatchEvent(event);
   }
 
   // Bind Events
