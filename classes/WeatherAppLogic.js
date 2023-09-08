@@ -1,41 +1,59 @@
 export default class WeatherAppLogic {
   constructor() {
     // Structure
+    this.form = document.getElementById('weather-form');
     this.city = document.getElementById('city');
-    this.validationBtn = document.getElementById('validationBtn');
 
     // API - WeatherStack
-    const ACCESS_KEY = 'f71ba1ecf0a2fe236a840990b40069a4';
-    this.apiURL = 'http://api.weatherstack.com/current?access_key=${ACCESS_KEY}&query={this.city.value}';
+    this.ACCESS_KEY = 'f71ba1ecf0a2fe236a840990b40069a4';
+    this.data = "null";
+
+    // Load the class
+    this.load();
   }
 
   // Load
-  load() {
+  async load() {
     this.bindEvents();
   }
 
   // Methods
   async fetchAPI() {
     try {
-      const response = await fetch(this.apiURL);
+      const response = await fetch(`http://api.weatherstack.com/current?access_key=${this.ACCESS_KEY}&query=${this.city.value}`);
+
+      if (!response.ok) {
+        throw new Error('Something went wrong');
+      }
+
       const data = await response.json();
       return data;
-    } catch (error) {
-      console.log(error);
+
+    } catch (err) {
+      console.log('Oh no', err);
+      throw err;
     }
   }
 
-  actionButton() {
+  async submitForm(e) {
     e.preventDefault();
-    this.fetchAPI().then(data => {
-      console.log(data);
-    });
+    if (this.city.value === '') {
+      alert('Please enter a city!');
+      return;
+    } else {
+      try {
+        this.data = await this.fetchAPI();
+        console.log(this.data);
+      } catch (err) {
+        console.log('Oh no', err);
+      }
+    }
   }
 
   // Bind Events
   bindEvents() {
-    this.validationBtn.addEventListener('click', (e) => {
-      this.actionButton();
+    this.form.addEventListener('submit', e => {
+      this.submitForm(e);
     });
   }
 }

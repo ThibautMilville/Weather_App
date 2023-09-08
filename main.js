@@ -1,3 +1,3 @@
-import WeatherAppLogic from './classes/WeatherAppIntegration.js';
+import WeatherAppLogic from './classes/WeatherAppLogic.js';
 
-new WeatherAppLogic().load();
+const weatherApp = new WeatherAppLogic();
