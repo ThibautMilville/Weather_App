@@ -5,6 +5,8 @@
   --black: #000;
   --light-blue: #7bb2ff;
   --medium-blue: #7aa8ff;
+  --dark-blue: #4f83ff;
+  --dark-medium-blue: #3d6de6;
 }
 
 * {
@@ -20,7 +22,7 @@ body {
   min-height: 100vh;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.2;
   color: var(--black);
   background-color: var(--light-blue);
 }
@@ -36,7 +38,7 @@ body main div.main-box h1 {
   text-align: center;
   margin-bottom: 1rem;
 }
-body main div.main-box p {
+body main div.main-box p.description {
   font-size: 1rem;
   margin-bottom: 1rem;
   text-align: center;
@@ -46,6 +48,7 @@ body main div.main-box div#informations {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 0.5rem;
 }
 body main div.main-box div#informations h2 {
   text-align: center;
@@ -55,6 +58,9 @@ body main div.main-box div#informations img {
   width: 100%;
   max-width: 50px;
   margin-bottom: 1rem;
+}
+body main div.main-box div#informations p:not(:last-child) {
+  margin-bottom: 0.2rem;
 }
 body main div.main-box div#informations.hidden {
   display: none;
@@ -87,9 +93,17 @@ body main div.main-box form input[type=submit] {
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
 }
 body main div.main-box form input[type=submit]:hover {
   background-color: var(--medium-blue);
+}
+body main div.main-box form input[type=submit]:last-child {
+  margin-top: 0.8rem;
+  background-color: var(--dark-blue);
+}
+body main div.main-box form input[type=submit]:last-child:hover {
+  background-color: var(--dark-medium-blue);
 }
 
 @media (max-width: 768px) {

@@ -7,6 +7,8 @@
   --black: #000;
   --light-blue: #7bb2ff;
   --medium-blue: #7aa8ff;
+  --dark-blue: #4f83ff;
+  --dark-medium-blue: #3d6de6;
 }
 
 * {
@@ -22,7 +24,7 @@ body {
   min-height: 100vh;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.2;
   color: var(--black);
   background-color: var(--light-blue);
 
@@ -41,7 +43,7 @@ body {
         margin-bottom: 1rem;
       }
 
-      p {
+      p.description {
         font-size: 1rem;
         margin-bottom: 1rem;
         text-align: center;
@@ -52,6 +54,7 @@ body {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin-bottom: 0.5rem;
 
         h2 {
           text-align: center;
@@ -62,6 +65,10 @@ body {
           width: 100%;
           max-width: 50px;
           margin-bottom: 1rem;
+        }
+
+        p:not(:last-child) {
+          margin-bottom: 0.2rem;
         }
 
         &.hidden {
@@ -100,9 +107,19 @@ body {
           font-size: 1rem;
           font-weight: bold;
           cursor: pointer;
+          transition: background-color 0.2s ease-in-out;
 
           &:hover {
             background-color: var(--medium-blue)
+          }
+
+          &:last-child {
+            margin-top: 0.8rem;
+            background-color: var(--dark-blue);
+
+            &:hover {
+              background-color: var(--dark-medium-blue);
+            }
           }
         }
       }

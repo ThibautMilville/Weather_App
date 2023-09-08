@@ -12,16 +12,19 @@
   <main class="weather-app">
     <div class="main-box">
       <h1>Weather App</h1>
-      <p>Enter your city name below to get the weather!</p>
+      <p class="description">Enter your city name below to get the weather!</p>
       <div id="informations" class="hidden">
         <h2 id="chose-city">Paris</h2>
         <img src="" id="weather-img" alt="">
+        <p id="weather-description"></p>
         <p>Temperature: <span id="temperature"></span></p>
+        <p>Feels like <span id="feelslike"></span></p>
       </div>
       <form id="weather-form">
         <label for="city">City:</label>
         <input type="text" name="city" id="city" placeholder="Enter your city name here...">
         <input type="submit" value="Search">
+        <input type="submit" value="Geolocate me">
       </form>
     </div>
   </main>

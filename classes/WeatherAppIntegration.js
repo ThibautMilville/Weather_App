@@ -9,7 +9,9 @@ export default class WeatherAppIntegration {
     this.informations = document.getElementById('informations');
     this.choseCity = document.getElementById('chose-city');
     this.weatherImg = document.getElementById('weather-img');
+    this.weatherDescription = document.getElementById('weather-description');
     this.temperature = document.getElementById('temperature');
+    this.feelsLike = document.getElementById('feelslike');
 
     // API - WeatherStack
     this.data = null;
@@ -31,11 +33,14 @@ export default class WeatherAppIntegration {
 
   displayData(data) {
     // Display the data
+    console.log(data);
     this.informations.classList.remove('hidden');
-    this.choseCity.textContent = `${data.location.name}, ${data.location.country}`;
+    this.choseCity.textContent = `${data.location.name}, ${data.location.region}, ${data.location.country}`;
     this.weatherImg.src = data.current.weather_icons[0];
     this.weatherImg.alt = data.current.weather_descriptions[0];
+    this.weatherDescription.textContent = data.current.weather_descriptions[0];
     this.temperature.textContent = `${data.current.temperature}°C`;
+    this.feelsLike.textContent = `${data.current.feelslike}°C`;
   }
 
   // Bind Events

@@ -6,6 +6,7 @@ export default class WeatherAppLogic {
 
     // API - WeatherStack
     this.ACCESS_KEY = 'f71ba1ecf0a2fe236a840990b40069a4';
+    this.coordinates = null;
     this.data = "null";
 
     // Load the class
@@ -20,7 +21,7 @@ export default class WeatherAppLogic {
   // Methods
   async fetchAPI() {
     try {
-      const response = await fetch(`http://api.weatherstack.com/current?access_key=${this.ACCESS_KEY}&query=${this.city.value}`);
+      const response = await fetch(`http://api.weatherstack.com/current?access_key=${this.ACCESS_KEY}&query=${this.city.value || this.coordinates.lat},${this.coordinates.lon}`);
 
       if (!response.ok) {
         throw new Error('Something went wrong');
@@ -35,7 +36,7 @@ export default class WeatherAppLogic {
     }
   }
 
-  async submitForm(e) {
+  async searchForm(e) {
     e.preventDefault();
     if (this.city.value === '') {
       alert('Please enter a city!');
@@ -50,6 +51,28 @@ export default class WeatherAppLogic {
     }
   }
 
+  async geoLocateMe(e) {
+    e.preventDefault();
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        // Save the latitude and longitude
+        this.coordinates = {
+          lat: position.coords.latitude,
+          lon: position.coords.longitude
+        };
+        // Fetch the API
+        try {
+          this.data = await this.fetchAPI();
+          this.onDataAvailable();
+        } catch (err) {
+          console.log('Oh no', err);
+        }
+      });
+    } else {
+      alert('Geolocation is not supported by this browser!');
+    }
+  }
+
   onDataAvailable() {
     // Create a custom event to pass the data to the WeatherAppIntegration class
     const event = new CustomEvent('weatherDataAvailable', {detail: this.data});
@@ -59,7 +82,8 @@ export default class WeatherAppLogic {
   // Bind Events
   bindEvents() {
     this.form.addEventListener('submit', e => {
-      this.submitForm(e);
+      // Check if the submitter is the search button or the geolocate button
+      e.submitter.value === 'Search' ? this.searchForm(e) : this.geoLocateMe(e);
     });
   }
 }
