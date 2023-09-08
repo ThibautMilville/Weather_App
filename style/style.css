@@ -25,6 +25,7 @@ body {
   background-color: var(--light-blue);
 }
 body main {
+  max-width: 18%;
   background-color: var(--white);
   padding: 1.6rem;
   border-radius: 0.5rem;
@@ -38,6 +39,7 @@ body main div.main-box h1 {
 body main div.main-box p {
   font-size: 1rem;
   margin-bottom: 1rem;
+  text-align: center;
 }
 body main div.main-box form {
   display: flex;
@@ -70,4 +72,10 @@ body main div.main-box form input[type=submit] {
 }
 body main div.main-box form input[type=submit]:hover {
   background-color: var(--medium-blue);
+}
+
+@media (max-width: 768px) {
+  body main {
+    max-width: 80%;
+  }
 }/*# sourceMappingURL=style.css.map */

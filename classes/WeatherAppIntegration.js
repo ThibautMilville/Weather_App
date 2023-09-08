@@ -1,4 +1,4 @@
-import WeatherAppLogic from "/scripts/classes/WeatherAppLogic.js";
+import WeatherAppLogic from "./WeatherAppLogic.js";
 
 export default class WeatherAppIntegration {
   constructor() {

@@ -9,10 +9,12 @@ export default class WeatherAppLogic {
     this.apiURL = 'http://api.weatherstack.com/current?access_key=${ACCESS_KEY}&query={this.city.value}';
   }
 
-  // Methods
+  // Load
   load() {
+    this.bindEvents();
   }
 
+  // Methods
   async fetchAPI() {
     try {
       const response = await fetch(this.apiURL);
@@ -24,15 +26,16 @@ export default class WeatherAppLogic {
   }
 
   actionButton() {
-    this.validationBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      this.fetchAPI().then(data => {
-        console.log(data);
-      });
+    e.preventDefault();
+    this.fetchAPI().then(data => {
+      console.log(data);
     });
   }
 
   // Bind Events
   bindEvents() {
+    this.validationBtn.addEventListener('click', (e) => {
+      this.actionButton();
+    });
   }
 }

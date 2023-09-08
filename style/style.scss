@@ -27,6 +27,7 @@ body {
   background-color: var(--light-blue);
 
   main {
+    max-width: 18%;
     background-color: var(--white);
     padding: 1.6rem;
     border-radius: 0.5rem;
@@ -43,6 +44,7 @@ body {
       p {
         font-size: 1rem;
         margin-bottom: 1rem;
+        text-align: center;
       }
 
       form {
@@ -82,6 +84,15 @@ body {
           }
         }
       }
+    }
+  }
+}
+
+// Media queries / Mobile
+@media (max-width: 768px) {
+  body {
+    main {
+      max-width: 80%;
     }
   }
 }
