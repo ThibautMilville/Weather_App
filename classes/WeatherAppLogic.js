@@ -21,13 +21,15 @@ export default class WeatherAppLogic {
   // Methods
   async fetchAPI() {
     try {
-      const response = await fetch(`http://api.weatherstack.com/current?access_key=${this.ACCESS_KEY}&query=${this.city.value || this.coordinates.lat},${this.coordinates.lon}`);
+      const response = await fetch(`http://api.weatherstack.com/current?access_key=${this.ACCESS_KEY}&query=${this.coordinates ? this.coordinates.lat + ',' + this.coordinates.lon : this.city.value}`);
 
       if (!response.ok) {
         throw new Error('Something went wrong');
       }
 
       const data = await response.json();
+      // Reset the coordinates and return data
+      this.coordinates = null;
       return data;
 
     } catch (err) {
@@ -54,7 +56,11 @@ export default class WeatherAppLogic {
   async geoLocateMe(e) {
     e.preventDefault();
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
+      try {
+        const position = await new Promise((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
+
         // Save the latitude and longitude
         this.coordinates = {
           lat: position.coords.latitude,
@@ -67,7 +73,9 @@ export default class WeatherAppLogic {
         } catch (err) {
           console.log('Oh no', err);
         }
-      });
+      } catch (err) {
+        console.log('Geolocation error', err);
+      }
     } else {
       alert('Geolocation is not supported by this browser!');
     }
@@ -75,7 +83,7 @@ export default class WeatherAppLogic {
 
   onDataAvailable() {
     // Create a custom event to pass the data to the WeatherAppIntegration class
-    const event = new CustomEvent('weatherDataAvailable', {detail: this.data});
+    const event = new CustomEvent('weatherDataAvailable', { detail: this.data });
     document.dispatchEvent(event);
   }
 
