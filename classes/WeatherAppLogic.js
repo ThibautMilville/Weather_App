@@ -5,7 +5,7 @@ export default class WeatherAppLogic {
     this.city = document.getElementById('city');
 
     // API - WeatherStack
-    this.ACCESS_KEY = 'f71ba1ecf0a2fe236a840990b40069a4';
+    this.ACCESS_KEY = 'put_your_access_key_here';
     this.coordinates = null;
     this.data = "null";
 
